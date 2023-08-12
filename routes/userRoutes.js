@@ -39,7 +39,6 @@ userRouter.delete("/user/cart/:id", authMiddleWare, (req, res) => {
 });
 userRouter.post("/insert", authMiddleWare, (req, res) => {
   const {name, description, price, countInStock, imageURL} = req.body;
-  console.log({name, description, price, countInStock, imageURL});
   if(!name || !description || !price || !countInStock || !imageURL){
     res.json({message : "please fill all data"})
   }

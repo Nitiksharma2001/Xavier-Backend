@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   });
 });
 router.get("/view/:id", (req, res) => {
-  productModel.findOne({ id: req.params.id }).exec((err, product) => {
+  productModel.findOne({ _id: req.params.id }).exec((err, product) => {
     if (err) {
       return res.json({ err });
     }

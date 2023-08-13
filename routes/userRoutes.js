@@ -31,7 +31,6 @@ userRouter.delete("/user/cart/:id", authMiddleWare, (req, res) => {
     if (error) {
       return res.json({ error });
     }
-    console.log(user);
     user.cart.pull(productId);
     user.save();
     return res.json({ message: "product removed from the cart" });

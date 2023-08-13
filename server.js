@@ -20,7 +20,7 @@ const connectToMONGO = async () => {
     app.use(authRouter);
     app.use(userRouter);
     app.listen(process.env.PORT, () => {
-      console.log("Listening to PORT", process.env.PORT);
+      console.log("Listening to PORT", process.env.PORT || 4000);
     });
   } catch (error) {
     console.log("unable to connect to MONGO Server");

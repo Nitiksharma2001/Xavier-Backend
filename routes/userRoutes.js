@@ -5,6 +5,7 @@ import { productModel } from "../models/models.js";
 import jwt from "jsonwebtoken";
 export const userRouter = express.Router();
 const authMiddleWare = (req, res, next) => {
+  // console.log(req.headers);
   const token = req.headers.authorization.slice(7);
   jwt.verify(token, process.env.JWT_kEY, function (err, user) {
     if (err) {
@@ -16,7 +17,8 @@ const authMiddleWare = (req, res, next) => {
 };
 userRouter.post("/user/:id", authMiddleWare, (req, res) => {
   const productId = req.params.id;
-  userModel.findOne({ id: productId }).exec((error, user) => {
+  const { name, email } = req.user;
+  userModel.findOne({ name, email }).exec((error, user) => {
     if (error) {
       return res.json({ error });
     }
@@ -46,7 +48,6 @@ userRouter.post("/insert", authMiddleWare, (req, res) => {
   }).then(product => {
     res.json({message : "product create successfully", product})
   })
-  
 });
 userRouter.get("/user/cart", authMiddleWare, (req, res) => {
   const { name, email } = req.user;

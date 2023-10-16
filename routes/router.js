@@ -3,7 +3,7 @@ import { productModel } from "../models/models.js";
 import "dotenv/config";
 const router = express.Router();
 router.get("/", (req, res) => {
-  productModel.find().exec((err, products) => {
+  productModel.find((err, products) => {
     if (err) {
       return res.json({ err });
     }
@@ -11,7 +11,8 @@ router.get("/", (req, res) => {
   });
 });
 router.get("/view/:id", (req, res) => {
-  productModel.findOne({ _id: req.params.id }).exec((err, product) => {
+  const productId = req.params.id
+  productModel.findOne({ _id: productId }, (err, product) => {
     if (err) {
       return res.json({ err });
     }
